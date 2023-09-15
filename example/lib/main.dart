@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    bool? platformVersion = await _dynamicIconNotificationPlugin.sendNotification();
+    bool? platformVersion = await _dynamicIconNotificationPlugin.sendNotification("Ravi", "HI", "44");
     setState(() {});
   }
 
@@ -38,7 +38,11 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: MaterialButton(
+              onPressed: () async {
+                bool? platformVersion = await _dynamicIconNotificationPlugin.sendNotification("Ravi", "HI", "44");
+              },
+              child: Text('Running on: $_platformVersion\n')),
         ),
       ),
     );
