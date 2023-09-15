@@ -24,9 +24,9 @@ class DynamicIconNotification {
     }
   }
 
-  Future<bool?> makeToast() async {
+  Future<bool?> makeToast(String msg) async {
     try {
-      final res = await methodChannel.invokeMethod('makeToast');
+      final res = await methodChannel.invokeMethod('makeToast', {"msg": msg});
       return res;
     } on PlatformException catch (e) {
       print(e.message);
