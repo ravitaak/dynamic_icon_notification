@@ -23,4 +23,14 @@ class DynamicIconNotification {
       return null;
     }
   }
+
+  Future<bool?> makeToast() async {
+    try {
+      final res = await methodChannel.invokeMethod('makeToast');
+      return res;
+    } on PlatformException catch (e) {
+      print(e.message);
+      return null;
+    }
+  }
 }
