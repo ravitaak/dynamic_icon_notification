@@ -4,17 +4,12 @@ import javax.management.Notification;
 import javax.naming.Context;
 import javax.swing.text.View;
 
-import org.w3c.dom.css.Rect;
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-<<<<<<< HEAD
 import android.graphics.Color;
-=======
 import android.graphics.Rect;
->>>>>>> 5989c97a3d1c95ee3204efb89dee2c8290cef00e
 import android.graphics.Typeface;
 import android.os.Build;
 import android.view.Gravity;
