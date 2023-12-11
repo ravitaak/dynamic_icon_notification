@@ -10,7 +10,11 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+<<<<<<< HEAD
 import android.graphics.Color;
+=======
+import android.graphics.Rect;
+>>>>>>> 5989c97a3d1c95ee3204efb89dee2c8290cef00e
 import android.graphics.Typeface;
 import android.os.Build;
 import android.view.Gravity;
@@ -72,7 +76,6 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
     TextView view = new TextView(context);
     view.setText(text);
     view.setGravity(Gravity.CENTER);
-    view.setTextColor(Color.RED);
     view.setTypeface(null, Typeface.BOLD);
     int widthSpec = View.MeasureSpec.makeMeasureSpec(rect.width(), View.MeasureSpec.EXACTLY);
     int heightSpec = View.MeasureSpec.makeMeasureSpec(rect.height(), View.MeasureSpec.EXACTLY);
