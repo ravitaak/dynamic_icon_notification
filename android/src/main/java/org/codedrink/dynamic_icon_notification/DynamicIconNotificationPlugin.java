@@ -91,8 +91,8 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
   public boolean showNotification(String title, String body, String temp) {
     try {
       NotificationCompat.Builder notificationBuilder = null;
-      Intent intent = getLaunchIntent(context);
-      PendingIntent contentIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, intent,
+      Intent intent = getLaunchIntent(getApplicationContext());
+      PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent,
           PendingIntent.FLAG_IMMUTABLE);
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         IconCompat icon = IconCompat.createWithBitmap(textAsBitmap(temp));
