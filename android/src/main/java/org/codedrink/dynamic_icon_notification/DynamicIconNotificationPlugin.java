@@ -90,8 +90,8 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
   public boolean showNotification(String title, String body, String temp) {
     try {
       NotificationCompat.Builder notificationBuilder = null;
-      Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
-      PendingIntent contentIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, notificationIntent,
+      Intent intent = getLaunchIntent(context);
+      PendingIntent contentIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, intent,
           PendingIntent.FLAG_IMMUTABLE);
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         IconCompat icon = IconCompat.createWithBitmap(textAsBitmap(temp));
@@ -153,6 +153,12 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
 
   private static int getDrawableResourceId(Context context, String name) {
     return context.getResources().getIdentifier(name, DRAWABLE, context.getPackageName());
+  }
+
+  private static Intent getLaunchIntent(Context context) {
+    String packageName = context.getPackageName();
+    PackageManager packageManager = context.getPackageManager();
+    return packageManager.getLaunchIntentForPackage(packageName);
   }
 
   private boolean makeToast(String msg) {
