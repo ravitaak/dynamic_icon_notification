@@ -1,27 +1,31 @@
 package org.codedrink.dynamic_icon_notification;
 
-import javax.management.Notification;
-import javax.naming.Context;
-import javax.swing.text.View;
-
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.core.graphics.drawable.IconCompat;
+import androidx.core.app.NotificationManagerCompat;
+import android.widget.Toast;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
+
+import android.app.PendingIntent;
+import android.content.Intent;
 
 public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallHandler {
 
@@ -86,7 +90,7 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
   public boolean showNotification(String title, String body, String temp) {
     try {
       NotificationCompat.Builder notificationBuilder = null;
-      Intent notificationIntent = new Intent(this.getApplicationContext(), MainActivity.class);
+      Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
       PendingIntent contentIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, notificationIntent,
           PendingIntent.FLAG_IMMUTABLE);
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
