@@ -1,29 +1,28 @@
 package org.codedrink.dynamic_icon_notification;
 
-import android.app.Notification;
+import javax.management.Notification;
+import javax.naming.Context;
+import javax.swing.text.View;
+
+import org.w3c.dom.css.Rect;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.TextView;
-import androidx.core.graphics.drawable.IconCompat;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import android.widget.Toast;
-
+import androidx.core.graphics.drawable.IconCompat;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
-import io.flutter.plugin.common.MethodChannel.Result;
 
 public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallHandler {
 
@@ -89,6 +88,9 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
   public boolean showNotification(String title, String body, String temp) {
     try {
       NotificationCompat.Builder notificationBuilder = null;
+      Intent notificationIntent = new Intent(this.getApplicationContext(), MainActivity.class);
+      PendingIntent contentIntent = PendingIntent.getActivity(this.getApplicationContext(), 0, notificationIntent,
+          PendingIntent.FLAG_IMMUTABLE);
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         IconCompat icon = IconCompat.createWithBitmap(textAsBitmap(temp));
         notificationBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
@@ -96,6 +98,7 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
             .setContentTitle(title)
             .setContentText(body)
             .setCategory(Notification.CATEGORY_STATUS)
+            .setContentIntent(contentIntent)
             .setOnlyAlertOnce(true)
             .setAutoCancel(true);
       } else {
@@ -103,6 +106,7 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
             .setSmallIcon(getDrawableResourceId(context, "ic_launcher"))
             .setContentTitle(title)
             .setContentText(body)
+            .setContentIntent(contentIntent)
             .setOnlyAlertOnce(true)
             .setCategory(Notification.CATEGORY_STATUS)
             .setAutoCancel(true);
