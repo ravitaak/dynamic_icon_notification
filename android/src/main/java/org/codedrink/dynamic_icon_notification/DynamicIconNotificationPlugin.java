@@ -130,6 +130,10 @@ public class DynamicIconNotificationPlugin implements FlutterPlugin, MethodCallH
     try {
       if (notificationManager != null) {
         notificationManager.cancel(NOTIFICATION_ID);
+      } else{
+        notificationManager = (NotificationManager) context
+          .getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(NOTIFICATION_ID);
       }
       return true;
     } catch (Exception e) {
