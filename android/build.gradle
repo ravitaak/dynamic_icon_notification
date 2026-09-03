@@ -26,7 +26,7 @@ android {
         namespace 'org.codedrink.dynamic_icon_notification'
     }
 
-    compileSdkVersion 33
+    compileSdkVersion 36
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
